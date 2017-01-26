@@ -1,5 +1,5 @@
-from urllib import request
 from html.parser import HTMLParser
+from urllib import request
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 
@@ -28,11 +28,3 @@ class HTMLLinkParser(HTMLParser):
         if self.link:
             self.documents.append((data, self.link))
             self.link = ""
-
-
-url = 'http://genome.cshlp.org/content/suppl/2017/01/17/gr.212720.116.DC1.html'
-
-parser = HTMLLinkParser(url)
-
-for d in parser.documents:
-    print(d)
