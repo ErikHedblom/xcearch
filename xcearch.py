@@ -3,7 +3,7 @@ import io
 import re
 from html.parser import HTMLParser
 from urllib.parse import urlparse, urlunparse
-from urllib.request import Request, urlopen
+from urllib.request import Request, urlopen, build_opener, HTTPCookieProcessor
 
 from openpyxl import load_workbook
 
@@ -16,7 +16,7 @@ class HTMLLinkParser(HTMLParser):
         super().__init__()
         self.base = urlparse(url)
         req = Request(url, headers={'User-Agent': 'Excearch/0.1'})
-        html = urlopen(req).read().decode('utf-8')
+        html = build_opener(HTTPCookieProcessor()).open(req).read().decode('utf-8')
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
